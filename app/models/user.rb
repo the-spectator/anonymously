@@ -20,8 +20,15 @@ class User < ApplicationRecord
   validates :date_of_birth, presence: true
   validate :valid_dob?
 
+  has_one :wallet
   has_many :sent_messages, class_name: 'Message', foreign_key: 'sender_id'
   has_many :received_messages, class_name: 'Message', foreign_key: 'receiver_id'
+
+  after_create :init_wallet
+
+  def init_wallet
+    self.create_wallet!
+  end
 
   def messages
     Message.where("sender_id = ? OR receiver_id = ?", self.id, self.id)

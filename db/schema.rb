@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180317062650) do
+ActiveRecord::Schema.define(version: 20180424184747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,21 @@ ActiveRecord::Schema.define(version: 20180317062650) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wallet_histories", force: :cascade do |t|
+    t.string "transaction_type"
+    t.string "recepient_name"
+    t.integer "charge"
+    t.bigint "wallet_id"
+    t.index ["wallet_id"], name: "index_wallet_histories_on_wallet_id"
+  end
+
+  create_table "wallets", force: :cascade do |t|
+    t.integer "points", default: 0
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_wallets_on_user_id"
+  end
+
   add_foreign_key "messages", "users", column: "receiver_id"
   add_foreign_key "messages", "users", column: "sender_id"
+  add_foreign_key "wallets", "users"
 end
