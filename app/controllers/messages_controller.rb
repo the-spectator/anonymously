@@ -19,6 +19,22 @@ class MessagesController < ApplicationController
     end
   end
 
+  def unlock
+    id = params[:id].to_i
+    current_message = current_user.received_messages.find(id)
+    current_message[:is_unlocked] = 1
+    current_message.save!
+    redirect_to dashboard_index_path
+  end
+
+  def like
+    message_id = params[:id].to_i
+    current_message = current_user.received_messages.find(message_id)
+    current_message.is_liked = 1 
+    current_message.save
+    redirect_to dashboard_index_path
+  end
+
   private
 
   def message_params
