@@ -5,5 +5,6 @@ FactoryBot.define do
     gender 'Male'
     email  Faker::Internet.email
     password 'pinky@10'
+    confirmed_at Date.today
   end
 end
