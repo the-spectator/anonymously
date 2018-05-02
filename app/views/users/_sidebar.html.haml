@@ -9,7 +9,7 @@
         %a.nav-link{:href => user_path(current_user)}
           Basic Info
       %li.nav-item
-        %a.nav-link{:href => "#"}
+        %a.nav-link{:href => wallet_path(current_user.id)}
           Wallet
       %li.nav-item
         %a.nav-link{ :href => edit_user_registration_path } Edit Profile

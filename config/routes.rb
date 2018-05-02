@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   get 'dashboard/index'
+  
+  devise_for :users, path: "sessions"
+
+  authenticated :user do
+    root 'dashboard#index', as: :authenticated_root
+  end
+
   root "home#index"
+
   resources :messages
   resources :messages do
     member do
@@ -9,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   get 'users/index' 
-  devise_for :users, path: "sessions"
+  
   resources :users
   
   resources :messages do

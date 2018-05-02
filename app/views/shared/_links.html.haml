@@ -24,10 +24,7 @@
       - if user_signed_in?
         %li.nav-item
           %a.nav-link{ :href => users_index_path } Profile
-      - if user_signed_in?
-        %li.nav-item
-          %a.nav-link{ :href => edit_user_registration_path } Edit Profile
-      - else
+      - unless user_signed_in?
         %li.nav-item
           %a.nav-link{ :href => new_user_registration_path } Register
       - if user_signed_in?
@@ -36,6 +33,3 @@
       - else
         %li.nav-item
           %a.nav-link{ :href => new_user_session_path } Login
-      - if user_signed_in?
-        %li.nav-item
-          %a.nav-link{ :href => wallet_path(current_user.id) } Wallet
