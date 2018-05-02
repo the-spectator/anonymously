@@ -9,6 +9,12 @@ Rails.application.routes.draw do
     end
   end
   
+  get 'users/index' 
+
+  root "home#index" 
+  devise_for :users, path: "sessions"
+  resources :users
+  
   resources :messages do
     member do
       get :like
